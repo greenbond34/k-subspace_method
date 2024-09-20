@@ -76,7 +76,7 @@ def predict(data_test, subspaces, dim) -> np.ndarray:
         norm_list = ray.get([wrapper_calc_norm.remote(i) for i in multiyou])
     else:
         norm_list = [
-            calcurate_norm(data_test, subspaces[i], dim) for i in range(num_classes)
+            calculate_norm(data_test, subspaces[i], dim) for i in range(num_classes)
         ]
     # 全てのクラスに対する計算が終了した後に、予測クラスを決定
     pred_list = np.empty(num_data, dtype=int)
@@ -88,10 +88,10 @@ def predict(data_test, subspaces, dim) -> np.ndarray:
 
 @ray.remote
 def wrapper_calc_norm(args):
-    return calcurate_norm(*args)
+    return calculate_norm(*args)
 
 
-def calcurate_norm(data_test, subspace, dim):
+def calculate_norm(data_test, subspace, dim):
     norm_k_list = np.zeros(len(data_test))
     for k in range(len(subspace)):
         for i in range(len(data_test)):
