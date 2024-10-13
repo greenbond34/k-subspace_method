@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 
 # 自作モジュール
-from modules.mnist import load_mnist
+from mnist import load_mnist
 
 
 # 並列処理を使うか選択
